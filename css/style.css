@@ -1,0 +1,195 @@
+body {
+	background-color: #444;
+}
+
+svg {
+	border: 10px solid #000;
+	overflow: hidden;
+	background-color: #ddd;
+}
+.node {
+	white-space: nowrap;
+}
+.node rect,
+.node circle,
+.node ellipse {
+	stroke: #333;
+	fill: #fff;
+	stroke-width: 1.5px;
+}
+.cluster rect {
+	stroke: #333;
+	fill: #000;
+	fill-opacity: 0.1;
+	stroke-width: 1.5px;
+}
+.edgePath path.path {
+	stroke: #333;
+	stroke-width: 1.5px;
+	fill: none;
+}
+
+.title {
+	text-align: center;
+	padding: 10px;
+	font-size: 25px;
+	font-weight: bold;
+	font-family: "Lucida Console", Monaco, monospace;
+	color: #fff;
+	width: 95%;
+}
+.title-sub {
+	font-size: 35px;
+}
+
+.tree-area {
+	margin-left: 5%;
+	width: 85%;
+	height: 70%;
+	text-align: center;
+}
+
+
+.search-div button {
+	background-color: #000; 
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 16px;	
+    text-align: center;
+    margin: 10px;
+}
+
+
+.search-div input {
+	padding: 10px 25px;
+	border: none;
+	width: 100px;	
+	margin-left: 5%;
+}
+
+.search-div-input-nome {
+	width: 300px !important;
+}
+
+.search-div-input-level {
+	margin-left: 10px !important;
+	width: 60px !important;
+}
+
+.search-div-button-hover:hover {
+	-webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    background-color: #fff; 
+    color: #000;
+}
+
+.search-box-background {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.search-box-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    height: auto;
+    text-align: center;
+}
+
+.search-box-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.search-box-close:hover,
+.search-box-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.search-box-input {
+	width: 60%;
+	padding: 10px 25px;
+	border-top: 2px solid #888;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid #888;
+}
+
+.search-box-list {
+	margin: 10px;
+}
+
+.search-box-list-line {
+	display: block;
+	border-bottom: 1px solid #ccc;
+	color: #333;
+	font-size: 18px;
+	font-weight: 0;
+}
+.search-box-list-line:hover {
+	color: #000	;
+	font-weight: 900;
+}
+
+.search-details-list {
+	text-align: left;
+	font-size: 16px;
+}
+
+.search-details-list h2 {
+	color: #444;
+}
+
+.aTipo {
+	font-weight: 10;
+	color: #000;
+}
+
+.aTipo:hover {
+	font-weight: 900;
+	color: #444;
+}
+
+#loadingBox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #444;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
