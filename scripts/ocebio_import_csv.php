@@ -28,9 +28,10 @@
 
 	pg_query("
 			COPY ocebio_aux_table (local, tipo, titulo, autor, ano, notasg)
-			FROM '/home/gabrielm/Downloads/oceanografia_biologica.csv' DELIMITER ',' CSV HEADER;
+			FROM 'C:\\Program Files\\PostgreSQL\\10\\oceanografia_biologica.csv' DELIMITER ',' CSV HEADER;
 			");
-
+			///home/gabrielm/Downloads/oceanografia_biologica.csv
+			//C:\\Program Files\\PostgreSQL\\10\\oceanografia_biologica.csv
 	pg_query("
 				UPDATE ocebio_aux_table
 				SET tipo = 'm'
@@ -49,9 +50,30 @@
 		$numrows = pg_num_rows($temp_result);
 	for ($i = 0; $i < $numrows; $i++) {
 		$line_data = pg_fetch_row($temp_result, $i);
-		$aux = explode(': ',$line_data[1]);
-		$aux2 = explode('.', $aux[1]);
-		$insert_line_data = $aux2[1];
+		$aux = str_replace("Prof. ","",$line_data[1]);
+		$aux = str_replace("Dr. ","",$aux);
+		$aux = str_replace("Profa. ","",$aux);
+		$aux = str_replace("Dra. ","",$aux);
+		$aux = str_replace("Orientador: ","",$aux);
+		$aux = str_replace("Orientadora: ","",$aux);
+		$aux = str_replace("Lic. ","",$aux);
+		$aux = str_replace("_x000D_","",$aux);
+		$aux = str_replace("'","",$aux);
+		$aux = explode('.',$aux);
+		$out = "";
+		for ($ii = 0; $ii < (count($aux)-1); $ii++) {
+			$out = $out.$aux[$ii];
+		}
+		if (strpos($out, '<br />') == true){
+			$out = explode("<br />",$out);
+			$out = $out[0];
+		}
+		if (strpos($out, '<br />') == true){
+			$out = explode("\\n",$out);
+			$out = $out[0];
+		}
+
+		$insert_line_data = $out;
 		pg_query("UPDATE ocebio_aux_table
 				SET notasg = '".$insert_line_data."'
 				WHERE id = '".$line_data[0]."'");
