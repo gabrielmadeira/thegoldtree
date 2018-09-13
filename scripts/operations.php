@@ -63,7 +63,7 @@
 		$ori_nome = "";
 		for ($i = 0; $i < $numrows; $i++) {
 			$line = pg_fetch_row($result, $i);
-			$ori_nome = $line[2];
+			$ori_nome = ucwords($line[2]);
 			$line_data = array("alu_id"=>ucwords($line[0]), "rel_id"=>$line[1]);
 			array_push($arra, $line_data);
 		}
