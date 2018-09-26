@@ -28,7 +28,7 @@
 
 	pg_query("
 			COPY ocebio_aux_table (local, tipo, titulo, autor, ano, notasg)
-			FROM 'C:\\Program Files\\PostgreSQL\\10\\oceanografia_biologica.csv' DELIMITER ',' CSV HEADER;
+			FROM '/home/gabrielm/Downloads/oceanografia_biologica.csv' DELIMITER ',' CSV HEADER;
 			");
 			///home/gabrielm/Downloads/oceanografia_biologica.csv
 			//C:\\Program Files\\PostgreSQL\\10\\oceanografia_biologica.csv
@@ -45,7 +45,7 @@
 
 
 	$temp_result = pg_query(
-			"SELECT id, notasg FROM ocebio_aux_table WHERE notasg LIKE '%Orientador:%'"
+			"SELECT id, notasg FROM ocebio_aux_table"
 			);
 		$numrows = pg_num_rows($temp_result);
 	for ($i = 0; $i < $numrows; $i++) {
@@ -55,6 +55,7 @@
 		$aux = str_replace("Profa. ","",$aux);
 		$aux = str_replace("Dra. ","",$aux);
 		$aux = str_replace("Orientador: ","",$aux);
+		$aux = str_replace("Orientador : ","",$aux);
 		$aux = str_replace("Orientadora: ","",$aux);
 		$aux = str_replace("Lic. ","",$aux);
 		$aux = str_replace("_x000D_","",$aux);
@@ -68,8 +69,12 @@
 			$out = explode("<br />",$out);
 			$out = $out[0];
 		}
-		if (strpos($out, '<br />') == true){
-			$out = explode("\\n",$out);
+		if (strpos($out, '<br>') == true){
+			$out = explode("<br>",$out);
+			$out = $out[0];
+		}
+		if (strpos($out, "\n") == true){
+			$out = explode("\n",$out);
 			$out = $out[0];
 		}
 
