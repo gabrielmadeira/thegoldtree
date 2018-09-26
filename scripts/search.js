@@ -1,5 +1,6 @@
 // A função searchStart conecta as funções de busca, a função de desenhar a árvore e a função para verificar se um determinado ID existe
 function searchStart(id) {
+	var nameOut = "";
 	document.getElementById('loadingBoxDiv').style.display = "initial";
 	setTimeout(function(){
 		if (id == "n") {
@@ -12,6 +13,7 @@ function searchStart(id) {
 		upSearchRelIds = [];
 		downSearchRelIds = [];
 		
+		
 		var verifyID = 0;
 		var dataString = { id: id, op: "5" };
 		$.ajax({
@@ -21,12 +23,15 @@ function searchStart(id) {
 		//cache: false,
 		async: false,
 		success: function(html){	
-			if (html != "0"){
+			if (html[0] != "0"){
 				verifyID = 1;
+				nameOut = html;
+
 			}
 		}
 		});
 		if (verifyID == 1) {
+			document.getElementById('academicArea').innerHTML = "Árvore de <span class=\"academic-area-name\">"+nameOut+"</span>";
 			UpSearch(id,'n',parseInt(document.getElementById('searchInputLevel').value)); 
 			DownSearch(id,'n',parseInt(document.getElementById('searchInputLevel').value)); 
 			tryDraw();
@@ -166,7 +171,7 @@ function searchNames() {
 			document.getElementById("searchBoxList").innerHTML = "";
 			for (var i = 0; i < data.length; i++) { 
 				document.getElementById("searchBoxList").innerHTML +=
-					"<a onclick=\"document.getElementById('searchInputId').value = '"+data[i].id+"'; sbox.style.display = 'none';\" class=\"search-box-list-line\">"+data[i].nome.toUpperCase()+"</a>";
+					"<a onclick=\"document.getElementById('searchInputId').value = '"+data[i].id+"'; sbox.style.display = 'none'; document.getElementById('academicArea').innerHTML = 'ACADÊMICO <font color=red>"+data[i].nome.toUpperCase()+"</font> SELECIONADO'; \" class=\"search-box-list-line\">"+data[i].nome.toUpperCase()+"</a>";
 			}
 			
 		}

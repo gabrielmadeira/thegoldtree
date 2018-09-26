@@ -1,11 +1,11 @@
 body {
-	background-color: #444;
+	background-color: #333533;
 }
 
 svg {
-	border: 10px solid #000;
+	border: 10px solid #242423;
 	overflow: hidden;
-	background-color: #ddd;
+	background-color: #e8eddf;
 }
 .node {
 	white-space: nowrap;
@@ -13,18 +13,18 @@ svg {
 .node rect,
 .node circle,
 .node ellipse {
-	stroke: #333;
-	fill: #fff;
+	stroke: #333533;
+	fill: #e8eddf;
 	stroke-width: 1.5px;
 }
 .cluster rect {
-	stroke: #333;
-	fill: #000;
+	stroke: #333533;
+	fill: #242423;
 	fill-opacity: 0.1;
 	stroke-width: 1.5px;
 }
 .edgePath path.path {
-	stroke: #333;
+	stroke: #333533;
 	stroke-width: 1.5px;
 	fill: none;
 }
@@ -35,7 +35,7 @@ svg {
 	font-size: 25px;
 	font-weight: bold;
 	font-family: "Lucida Console", Monaco, monospace;
-	color: #fff;
+	color: #e8eddf;
 	width: 95%;
 }
 .title-sub {
@@ -49,11 +49,27 @@ svg {
 	text-align: center;
 }
 
+.about-area {
+	margin-top: 25px;
+	margin-left: 5%;
+	width: 85%;
+	height: 70%;
+	text-align: center;
+	color: #e8eddf;
+	display: none;
+}
+.about-area-title {
+	font-size: 30px;
+	font-weight: 900;
+}
+.about-area-p {
+	font-size: 18px;
+}
 
 .search-div button {
-	background-color: #000; 
+	background-color: #242423; 
     border: none;
-    color: white;
+    color: #e8eddf;
     padding: 10px 25px;
     text-decoration: none;
     font-size: 16px;	
@@ -62,10 +78,29 @@ svg {
 }
 
 
+.generic-button {
+	background-color: #242423; 
+    border: none;
+    color: #e8eddf;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 16px;	
+    text-align: center;
+    margin: 10px;
+}
+
+.generic-button-hover:hover {
+	-webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    background-color: #e8eddf; 
+    color: #242423;
+}
+
 .search-div input {
 	padding: 10px 25px;
 	border: none;
-	width: 100px;	
+	width: 45px;	
+	background-color: #e8eddf;
 	margin-left: 5%;
 }
 
@@ -81,8 +116,8 @@ svg {
 .search-div-button-hover:hover {
 	-webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
-    background-color: #fff; 
-    color: #000;
+    background-color: #e8eddf; 
+    color: #242423;
 }
 
 .search-box-background {
@@ -118,7 +153,7 @@ svg {
 
 .search-box-close:hover,
 .search-box-close:focus {
-    color: #000;
+    color: #242423;
     text-decoration: none;
     cursor: pointer;
 }
@@ -144,7 +179,7 @@ svg {
 	font-weight: 0;
 }
 .search-box-list-line:hover {
-	color: #000	;
+	color: #242423	;
 	font-weight: 900;
 }
 
@@ -159,12 +194,31 @@ svg {
 
 .aTipo {
 	font-weight: 10;
-	color: #000;
+	color: #242423;
 }
 
 .aTipo:hover {
 	font-weight: 900;
 	color: #444;
+}
+
+.logo {
+	width: 15%; 
+	margin-left: 45%; 
+	margin-top: 20px;
+}
+
+.academic-area {
+	color: #f3f3f3;
+	font-weight: 500;
+	font-size: 20px;
+	float: right;
+	margin-right: 5%;
+}
+
+.academic-area-name {
+	color: #f5cb5c;
+	font-weight: 900;
 }
 
 #loadingBox {

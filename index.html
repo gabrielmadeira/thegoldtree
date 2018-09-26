@@ -12,21 +12,35 @@
 	</head>
 	<!--  Gerar árvore de boa-vindas ao carregar a página -->
 	<body onload="tryDraw();"> 
-		<div class="title">PROJETO<br><span class="title-sub">ACTREE</span></div>
-		<div class="search-div">
-			<input id="searchInputId" class="search-div" type="number" placeholder="ID" required>
-			<input id="searchInputLevel" class="search-div-input-level" type="number" placeholder="Nível" required>
-			<!-- Ao ser pressionado chama a função verifyFields para verificar se os campos ID e Níveis estão preenchido e em seguida aciona a função searchStart com o parametro n, para indicar que é a raiz na recursividade, que dará iniçio a geração da árvore -->
-			<button class="search-div search-div-button-hover" onclick="verifyFields();" >Gerar Árvore</button> 
-			<!-- Ao ser pressionado exibe a caixa para pesquisa -->
-			<button id="searchBoxButton" class="search-div search-div-button-hover" onclick="sbox.style.display = 'block';">Pesquisa por nome</button>
-		</div>
+		<!-- <div class="title"><br><span class="title-sub"></span></div> -->
 		
-		<!-- Estrutura utilizada pela biblioteca dagre-d3 para a geração da árvore -->
-		<div class="tree-area">
-			<svg width="100%" height="450px" >
-			  <g></g>
-			</svg>
+		<img src="images/thegoldtree_logo2.png" class="logo">
+		<div id="main">
+			<div class="search-div">
+				<input id="searchInputId" class="search-div" type="number" placeholder="ID" required style="display: none;">
+				<input id="searchInputLevel" class="search-div" type="number" placeholder="Nível" >
+				<!-- Ao ser pressionado chama a função verifyFields para verificar se os campos ID e Níveis estão preenchido e em seguida aciona a função searchStart com o parametro n, para indicar que é a raiz na recursividade, que dará iniçio a geração da árvore -->
+				<button class="search-div search-div-button-hover" onclick="verifyFields();" >Gerar Árvore</button> 
+				<!-- Ao ser pressionado exibe a caixa para pesquisa -->
+				<button id="searchBoxButton" class="search-div search-div-button-hover" onclick="sbox.style.display = 'block';">Pesquisar Acadêmico</button>
+				<span id="academicArea" class="academic-area"><span class="academic-area-name"></span></span>
+			</div>
+			
+			<!-- Estrutura utilizada pela biblioteca dagre-d3 para a geração da árvore -->
+			<div id="treeArea" class="tree-area">
+				<svg width="100%" height="450px" >
+				  <g></g>
+				</svg>
+			</div>
+			
+			<button class="generic-button generic-button-hover" onclick="switchToAbout();"  style="margin-left: 5%;">Sobre o projeto</button> 
+		</div>
+		<div id="about" class="about-area">
+			<span class="about-area-title">Sobre o projeto</span>
+			<p class="about-area-p">
+				ASKGFLASK asgnkljasgnk asklng asklngnkas dnaknlsd nagknlsgknla sgka sglknasnkg klnasg nklaskng
+			</p>
+			<button class="generic-button generic-button-hover" onclick="switchToMain();" >Voltar</button> 
 		</div>
 
 		<!-- Textarea utilizado para a inserção dos códigos que posteriormente serão convertidos em uma ávore pela biblioteca dagre-d3 -->
@@ -34,8 +48,8 @@
 		rankdir=LR
 		node [rx=5 ry=5 labelStyle="font: 300 14px 'Helvetica Neue', Helvetica"] 
 		edge [labelStyle="font: 300 14px 'Helvetica Neue', Helvetica"]
-		A [labelType="html" label="Seja <span style='font-size:16px; color: #000;'>Bem-Vindo</span> ao"];
-	    B [labelType="html" label="<span style='font-size:32px; color: red;'>ACTREE</span>"];
+		A [labelType="html" label="<span style='font-weight: 600;'>Seja <span style='font-weight: 900; font-size:16px; color: #242423;'>Bem-Vindo</span> ao projeto</span>"];
+	    B [labelType="html" label="<img src='images/thegoldtree_logo1.png' style='width: 150px;'>"];
 	    A -> B;
 		}</textarea>
 
@@ -99,10 +113,25 @@
 			    }
 			}
 			
+
+			function switchToAbout() {
+				document.getElementById('main').style.display = "none";
+				document.getElementById('about').style.display = "block";
+			}
+
+			function switchToMain() {
+				document.getElementById('main').style.display = "block";
+				document.getElementById('about').style.display = "none";
+			}
+
+
 			//Função para verificar campos vazios antes de ativar função para gerar a árvore
 
 			function verifyFields() {
-			    if(document.getElementById('searchInputId').checkValidity() && document.getElementById('searchInputLevel').checkValidity()){
+			    if(document.getElementById('searchInputId').checkValidity()){
+			    	if ((document.getElementById('searchInputLevel').value == "") || (document.getElementById('searchInputLevel').value == "0") || (document.getElementById('searchInputLevel').value < 0)){
+			    		document.getElementById('searchInputLevel').value = "1";
+			    	}
 			        searchStart('n');
 			    }else{
 			    	

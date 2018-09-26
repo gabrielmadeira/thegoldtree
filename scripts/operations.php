@@ -118,12 +118,12 @@
 	// A função executada quando $op == "5" é utilizada para verificar se um determinado ID existe
 	if ($op == "5") {
 		$id = preg_replace('/[^0-9,.]/', '',$_POST['id']);
-		$sql = "SELECT id FROM pessoa WHERE id = ".$id." ;";
+		$sql = "SELECT id, nome FROM pessoa WHERE id = ".$id." ;";
 		$result = pg_query($sql) or die('Query failed: ' . pg_last_error());
 		$numrows = pg_num_rows($result);
-	
+		$line = pg_fetch_row($result, 0);
 		if ($numrows == 1) {
-			echo "1";
+			echo ucwords($line[1]);
 		}else{
 			echo "0";
 		}
