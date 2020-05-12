@@ -1,89 +1,85 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="scripts/jquery-3.3.1.min.js"></script>
-		<script src="scripts/d3.v4.js"></script>
-		<script src="scripts/graphlib-dot.js"></script>
-		<script src="scripts/dagre-d3.js"></script>
+		<script src="libraries/jquery-3.3.1.min.js"></script>
+		<script src="libraries/d3.v4.js"></script>
+		<script src="libraries/graphlib-dot.js"></script>
+		<script src="libraries/dagre-d3.js"></script>
 		<script src="scripts/search.js"></script>
 		<link rel="stylesheet" href="css/style.css">
 		<meta charset="utf-8">
-		<title>Projeto ACTREE</title>
+		<title>The Gold Tree</title>
 	</head>
-	<!--  Gerar árvore de boa-vindas ao carregar a página -->
+
 	<body onload="tryDraw();"> 
-		<!-- <div class="title"><br><span class="title-sub"></span></div> -->
 		
 		<img src="images/thegoldtree_logo2.png" class="logo">
-		<div id="main">
+		<div id="main" class="main">
 			<div class="search-div">
 				<input id="searchInputId" class="search-div" type="number" placeholder="ID" required style="display: none;">
-				<input id="searchInputLevel" class="search-div" type="number" placeholder="Nível" >
-				<!-- Ao ser pressionado chama a função verifyFields para verificar se os campos ID e Níveis estão preenchido e em seguida aciona a função searchStart com o parametro n, para indicar que é a raiz na recursividade, que dará iniçio a geração da árvore -->
-				<button class="search-div search-div-button-hover" onclick="verifyFields();" >Gerar Árvore</button> 
-				<!-- Ao ser pressionado exibe a caixa para pesquisa -->
-				<button id="searchBoxButton" class="search-div search-div-button-hover" onclick="sbox.style.display = 'block';">Pesquisar Acadêmico</button>
-				<span id="academicArea" class="academic-area"><span class="academic-area-name"></span></span>
+
+				<button id="searchBoxButton" class="search-div search-div-button-hover search-div-search-button" onclick="sbox.style.display = 'block';">Search Academic</button>
+				
+				<input id="searchInputLevel" class="search-div" type="number" placeholder="Level" onchange="verifyFields();">
+				<span id="academicArea" class="academic-area"><span class="academic-area-name"></span></span> 
 			</div>
-			
-			<!-- Estrutura utilizada pela biblioteca dagre-d3 para a geração da árvore -->
+
 			<div id="treeArea" class="tree-area">
-				<svg width="100%" height="450px" >
+				<svg width="100%" height="100%" >
 				  <g></g>
 				</svg>
 			</div>
 			
-			<button class="generic-button generic-button-hover" onclick="switchToAbout();"  style="margin-left: 5%;">Sobre o projeto</button> 
+			<button class="generic-button generic-button-hover about-button" onclick="switchToAbout();"  style="margin-left: 5%;">About the project</button> 
 		</div>
 		<div id="about" class="about-area">
-			<span class="about-area-title">Sobre o projeto</span>
+			<span class="about-area-title">About the project</span>
 			<p class="about-area-p">
-				ASKGFLASK asgnkljasgnk asklng asklngnkas dnaknlsd nagknlsgknla sgka sglknasnkg klnasg nklaskng
+				<br>Academic genealogy investigates the relationships between student researchers <br>and academy professionals. In recent years, it proved to be a powerful <br>technique to help analyze the spread of scientific knowledge. Tools that make <br>to visualize these relationships among academics easier are potentially useful <br>and have been proposed. This work specifies and describes the development of a <br>Web information system for creating and visualizing academic genealogy trees <br>from a set of metadata extracted and integrated from multiple sources. The <br>proposed system allows a researcher to query and track information about his <br>or her advisers and graduate students at any level. A case study was explored <br>to validate the system using data from more than 570 thousand theses and <br>dissertations. The project was developed in the Information Management <br>Research Group (GINFO) of the Universidade Federal do Rio Grande (FURG) and <br>was partially funded by the FAPERGS. 
+<br><br>
+<br>How to cite this work: Madeira, G., Borges, E. N., Barañano, M., Nascimento, <br>P. K., Lucca, G., Maia, M. F., Salles, H., Dimuro, G. The Gold Tree: an <br>information system for analyzing academic genealogy. In: International <br>Conference on Enterprise Information Systems (ICEIS), 2019.
+
 			</p>
-			<button class="generic-button generic-button-hover" onclick="switchToMain();" >Voltar</button> 
+			<button class="generic-button generic-button-hover" onclick="switchToMain();" >Back</button> 
 		</div>
 
-		<!-- Textarea utilizado para a inserção dos códigos que posteriormente serão convertidos em uma ávore pela biblioteca dagre-d3 -->
 		<textarea id="inputGraph" style="display: none" >digraph{  
 		rankdir=LR
 		node [rx=5 ry=5 labelStyle="font: 300 14px 'Helvetica Neue', Helvetica"] 
 		edge [labelStyle="font: 300 14px 'Helvetica Neue', Helvetica"]
-		A [labelType="html" label="<span style='font-weight: 600;'>Seja <span style='font-weight: 900; font-size:16px; color: #242423;'>Bem-Vindo</span> ao projeto</span>"];
+		A [labelType="html" label="<span style='font-weight: 600;'><span style='font-weight: 900; font-size:16px; color: #242423;'>Welcome</span> to the project</span>"];
 	    B [labelType="html" label="<img src='images/thegoldtree_logo1.png' style='width: 150px;'>"];
 	    A -> B;
 		}</textarea>
 
-		<!-- Elemento gráfico de loading -->
 		<div id="loadingBoxDiv" class="search-box-background" style="display: none;"><div id="loadingBox"></div></div>
 
-		<!-- Caixa de pesquisa inicialmente desabilitada -->
 		<div id="searchBox" class="search-box-background">
 		  <div class="search-box-content">
 		    <span class="search-box-close">&times;</span><br>
-		    <input id="searchBoxInput" class="search-box-input" type="text" placeholder="Nome" onkeyup="searchNames();">
+		    <input id="searchBoxInput" class="search-box-input" type="text" placeholder="Name" onkeyup="searchNames();">
 		    <div id="searchBoxList" class="search-box-list"></div>
 		  </div>
 		</div>
 
-		<!-- Caixa de detalhes das relações inicialmente desabilidade -->
 		<div id="searchDetails" class="search-box-background">
 		  <div class="search-box-content">
 		  	<span class="search-box-close">&times;</span><br>
 		    <div id="searchDetailsList" class="search-details-list">
 
-		    	<h2> Detalhes do <span id="detailsTipoEx"></span> de <span id="detailsAlunoEx"></span> </h2>
+		    	<h2> Details of <span id="detailsAuthorEx"></span>'s <span id="detailsTypeEx"></span> degree  </h2>
 		    	<hr>
-		    	<b>Aluno:</b> <span id="detailsAluno"></span> <br>
-		    	<b>Orientador:</b> <span id="detailsOrientador"></span> <br>
-		    	<b>Título:</b> <span id="detailsTitle"></span> <br>
-		    	<b>Tipo:</b> <span id="detailsTipo"></span> <br>
-		    	<b>Ano:</b> <span id="detailsAno"></span> <br>
+		    	<b>Author:</b> <span id="detailsAuthor"></span> <br>
+		    	<b>Advisor:</b> <span id="detailsAdvisor"></span> <br>
+		    	<b>Title:</b> <span id="detailsTitle"></span> <br>
+		    	<b>Type:</b> <span id="detailsType"></span> <br>
+		    	<b>Year:</b> <span id="detailsYear"></span> <br>
 		    	<b>Url:</b> <span id="detailsUrl"></span> <br>
-				<b>Citação:</b> <span id="detailsCitation"></span> <br>
-				<b>Tópico:</b> <span id="detailsTopic"></span> <br>
-				<b>Lattes do autor:</b> <span id="detailsLattes"></span> <br>
-				<b>Sigla da universidade:</b> <span id="detailsNetAcronym"></span> <br>
-				<b>Repositório de origem:</b> <span id="detailsNetName"></span> <br>
+				<b>Citation:</b> <span id="detailsCitation"></span> <br>
+				<b>Topic:</b> <span id="detailsTopic"></span> <br>
+				<b>Lattes of author:</b> <span id="detailsLattes"></span> <br>
+				<b>Network Acronym:</b> <span id="detailsInstitutionAcron"></span> <br>
+				<b>Source repository:</b> <span id="detailsInstitutionName"></span> <br>
 				<hr>
 
 
@@ -93,7 +89,6 @@
 
 		<script>
 			
-			//Comandos para exibir e esconder caixa de pesquisa e caixa de detalhes
 
 			var sbox = document.getElementById('searchBox');
 			var spanBox = document.getElementsByClassName("search-box-close")[0];
@@ -125,7 +120,6 @@
 			}
 
 
-			//Função para verificar campos vazios antes de ativar função para gerar a árvore
 
 			function verifyFields() {
 			    if(document.getElementById('searchInputId').checkValidity()){
@@ -139,11 +133,10 @@
 			}
 
 
-			//Variaveis da biblioteca dagre-d3
 
 			var digraphStyle = 
 			"rankdir=LR node [rx=5 ry=5 labelStyle=\"font: 300 14px 'Helvetica Neue', Helvetica\"] edge [labelStyle=\"font: 300 14px 'Helvetica Neue', Helvetica\"]";
-			//nodesep=70 ranksep=50 rankdir="LR" marginx=20 marginy=20
+
 			var inputGraph = document.querySelector("#inputGraph");
 			var oldInputGraphValue;
 			var graphRE = /[?&]graph=([^&]+)/;
@@ -155,14 +148,16 @@
 			var debugAlignmentMatch = window.location.search.match(debugAlignmentRE);
 			var debugAlignment;
 			if (debugAlignmentMatch) debugAlignment = debugAlignmentMatch[1];
-			var svg = d3.select("svg"),
-			    inner = d3.select("svg g"),
-			    zoom = d3.zoom().on("zoom", function() {
-			      inner.attr("transform", d3.event.transform);
-			    });
-			svg.call(zoom);
-			var render = dagreD3.render();
-			var g;
+
+
+			// var svg = d3.select("svg"),
+			//     inner = d3.select("svg g"),
+			//     zoom = d3.zoom().on("zoom", function() {
+			//       inner.attr("transform", d3.event.transform);
+			//     });
+			// svg.call(zoom);
+			// var render = dagreD3.render();
+			// var g;
 
 		</script>
 	</body>
