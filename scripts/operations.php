@@ -60,7 +60,7 @@
 		}else{
 			$relid = "n";
 		}
-		$sql = "SELECT aut.id, rel.id, adv.name FROM relationship rel INNER JOIN researcher aut ON rel.id_author = aut.id INNER JOIN pessoa adv ON rel.id_advisor = adv.id WHERE rel.id_advisor = ".$advisor." ORDER BY rel.type;";	
+		$sql = "SELECT aut.id, rel.id, adv.name FROM relationship rel INNER JOIN researcher aut ON rel.id_author = aut.id INNER JOIN researcher adv ON rel.id_advisor = adv.id WHERE rel.id_advisor = ".$advisor." ORDER BY rel.type;";	
 		$result = pg_query($sql) or die('Query failed: ' . pg_last_error());
 		$numrows = pg_num_rows($result);
 		$arra = array();
